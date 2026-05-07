@@ -1,6 +1,6 @@
 package com.example.rayfield.domain
 
-import com.example.rayfield.data.XrayKeyPair
+import com.example.rayfield.data.xray.types.XrayKeyPair
 
 //
 // Created by Kirill "Raaveinm" on 4/29/26.

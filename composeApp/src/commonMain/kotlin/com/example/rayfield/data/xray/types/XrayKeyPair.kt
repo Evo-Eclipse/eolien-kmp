@@ -1,4 +1,4 @@
-package com.example.rayfield.data
+package com.example.rayfield.data.xray.types
 
 //
 // Created by Kirill "Raaveinm" on 4/29/26.

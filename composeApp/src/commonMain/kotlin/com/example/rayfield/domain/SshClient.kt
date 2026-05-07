@@ -1,6 +1,6 @@
 package com.example.rayfield.domain
 
-import com.example.rayfield.data.CommandResult
+import com.example.rayfield.data.xray.types.CommandResult
 
 //
 // Created by Kirill "Raaveinm" on 4/29/26.
