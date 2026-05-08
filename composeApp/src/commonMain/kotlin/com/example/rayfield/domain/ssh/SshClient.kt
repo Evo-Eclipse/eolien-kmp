@@ -1,10 +1,6 @@
-package com.example.rayfield.domain
+package com.example.rayfield.domain.ssh
 
 import com.example.rayfield.data.xray.types.CommandResult
-
-//
-// Created by Kirill "Raaveinm" on 4/29/26.
-//
 
 interface SshClient {
     suspend fun connect (

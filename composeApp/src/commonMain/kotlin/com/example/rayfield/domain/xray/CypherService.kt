@@ -1,4 +1,4 @@
-package com.example.rayfield.domain
+package com.example.rayfield.domain.xray
 
 import com.example.rayfield.data.xray.types.XrayKeyPair
 

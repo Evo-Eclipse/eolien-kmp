@@ -1,6 +1,7 @@
 package com.example.rayfield.domain
 
 import com.example.rayfield.data.xray.types.XrayKeyPair
+import com.example.rayfield.domain.xray.CypherService
 import org.bouncycastle.crypto.generators.X25519KeyPairGenerator
 import org.bouncycastle.crypto.params.X25519KeyGenerationParameters
 import org.bouncycastle.crypto.params.X25519PrivateKeyParameters

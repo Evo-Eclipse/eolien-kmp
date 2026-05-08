@@ -1,6 +1,7 @@
 package com.example.rayfield.domain
 
 import com.example.rayfield.data.xray.types.CommandResult
+import com.example.rayfield.domain.ssh.SshClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import net.schmizz.sshj.SSHClient
