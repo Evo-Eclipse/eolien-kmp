@@ -32,6 +32,7 @@ import com.example.rayfield.ui.navigation.LocalBackNavigator
 import com.example.rayfield.ui.navigation.RawSshTab
 import com.example.rayfield.ui.navigation.SettingsTab
 import com.example.rayfield.ui.navigation.tabIndex
+import com.example.rayfield.ui.state.GlobalBlurHolder
 import com.example.rayfield.ui.theme.LocalDimensions
 import io.github.neilyich.glassmorphism.BlurHolder
 import io.github.neilyich.glassmorphism.blurredContent
@@ -43,6 +44,7 @@ fun App(
     modifier: Modifier = Modifier,
     blurHolder: BlurHolder = rememberBlurHolder()
 ) {
+    val globalBlurHolder = GlobalBlurHolder.current ?: rememberBlurHolder()
     val searchState: SearchBarState = rememberSearchBarState()
     val textFieldState = rememberTextFieldState()
     val windowSize = calculateWindowSize()
