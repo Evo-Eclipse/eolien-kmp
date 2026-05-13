@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.TabNavigator
+import com.example.rayfield.domain.helpers.CoilInitializer
 import com.example.rayfield.domain.helpers.LocalWindowSize
 import com.example.rayfield.domain.helpers.calculateWindowSize
 import com.example.rayfield.ui.animations.AnimatedTabTransition
@@ -44,11 +45,12 @@ fun App(
     modifier: Modifier = Modifier,
     blurHolder: BlurHolder = rememberBlurHolder()
 ) {
-    val globalBlurHolder = GlobalBlurHolder.current ?: rememberBlurHolder()
     val searchState: SearchBarState = rememberSearchBarState()
     val textFieldState = rememberTextFieldState()
     val windowSize = calculateWindowSize()
     val backNavigator = remember { mutableStateOf<Navigator?>(null) }
+
+    CoilInitializer()
 
     CompositionLocalProvider(
         LocalWindowSize provides windowSize,
