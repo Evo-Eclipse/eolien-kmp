@@ -18,7 +18,6 @@ import com.example.rayfield.data.ssh.ServerUnit
 import com.example.rayfield.domain.helpers.WindowSize
 import com.example.rayfield.domain.helpers.calculateWindowSize
 import com.example.rayfield.ui.adapters.horizontalMouseScroll
-import com.example.rayfield.ui.mock.mockServers
 import com.example.rayfield.ui.screen.EditScreen
 import com.example.rayfield.ui.theme.LocalDimensions
 
@@ -28,8 +27,9 @@ import com.example.rayfield.ui.theme.LocalDimensions
 
 
 @Composable fun DisplayGrid(
-    navigator: Navigator,
-    serverList: List<ServerUnit>? = null
+    serverList: List<ServerUnit>? = null,
+    onClick: (ServerUnit) -> Unit = {},
+    onLongClick: (ServerUnit) -> Unit = {}
 ) {
     val dimen = LocalDimensions.current
     val windowSize = calculateWindowSize()
@@ -52,9 +52,7 @@ import com.example.rayfield.ui.theme.LocalDimensions
                 ServerInfoCard(
                     modifier = Modifier.wrapContentSize(),
                     server = server,
-                    onClick = {
-                        navigator.push(EditScreen(serverId = server.serverId))
-                    }
+                    onClick = { onClick(server) }
                 )
             }
         }
@@ -79,9 +77,7 @@ import com.example.rayfield.ui.theme.LocalDimensions
                 ServerInfoCard(
                     modifier = Modifier.wrapContentSize(),
                     server = server,
-                    onClick = {
-                        navigator.push(EditScreen(serverId = server.serverId))
-                    }
+                    onClick = { onClick(server) }
                 )
             }
         }

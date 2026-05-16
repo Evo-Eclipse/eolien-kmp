@@ -1,4 +1,4 @@
-package com.example.rayfield.data.xray.types
+package com.example.rayfield.data.ssh
 
 data class CommandResult(
     val exitCode: Int,
