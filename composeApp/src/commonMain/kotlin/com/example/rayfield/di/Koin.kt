@@ -3,8 +3,10 @@ package com.example.rayfield.di
 import com.example.rayfield.data.database.AppDatabase
 import com.example.rayfield.data.database.getRoomDatabase
 import com.example.rayfield.domain.ssh.SshClient
+import com.example.rayfield.domain.xray.CypherService
 import com.example.rayfield.ui.state.MainScreenModel
 import com.example.rayfield.ui.state.RawSshScreenModel
+import com.example.rayfield.ui.state.configuration.EditScreenModel
 import com.example.rayfield.ui.state.configuration.SshScreenModel
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
@@ -22,14 +24,21 @@ val commonModule = module {
     single { getRoomDatabase(get()) }
     single { get<AppDatabase>().serverDao() }
     factory { SshClient() }
+    single { CypherService() }
     factory { MainScreenModel(get()) }
     factory { RawSshScreenModel(get()) }
-    factory { (configId: String?, serverId: String?) ->
+    factory { params ->
         SshScreenModel(
             serverDao = get(),
-            initialConfigId = configId,
-            initialServerId = serverId
-        )
-    }}
+            initialServerId = params.values.getOrNull(0) as? String,
+            initialConfigId = params.values.getOrNull(1) as? String
+        )}
+    factory { params ->
+        EditScreenModel(
+            serverDao = get(),
+            cypherService = get(),
+            initialConfigId = params.values.getOrNull(0) as? String
+        )}
+}
 
 expect val platformModule: Module
