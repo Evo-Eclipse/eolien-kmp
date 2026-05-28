@@ -13,7 +13,6 @@ import com.example.rayfield.ui.screen.edit.InboundScreen
 import com.example.rayfield.ui.screen.edit.OutboundScreen
 import com.example.rayfield.ui.screen.edit.ProScreen
 import com.example.rayfield.ui.screen.edit.SshScreen
-import com.example.rayfield.ui.screen.edit.StreamScreen
 
 //
 // Created by Kirill "Raaveinm" on 5/4/26.
@@ -39,15 +38,6 @@ data class InboundTab(
     @Composable
     override fun Content() {
         InboundScreen(configId, serverId)
-    }
-}
-
-object StreamTab : Tab {
-    override val options: TabOptions
-        @Composable get() = TabOptions(index = 2u, title = "Stream")
-    @Composable
-    override fun Content() {
-        StreamScreen()
     }
 }
 

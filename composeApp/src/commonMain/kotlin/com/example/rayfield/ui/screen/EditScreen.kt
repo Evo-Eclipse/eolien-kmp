@@ -54,7 +54,6 @@ import com.example.rayfield.ui.navigation.InboundTab
 import com.example.rayfield.ui.navigation.OutboundTab
 import com.example.rayfield.ui.navigation.ProTab
 import com.example.rayfield.ui.navigation.SshTab
-import com.example.rayfield.ui.navigation.StreamTab
 import com.example.rayfield.ui.state.GlobalBlurHolder
 import com.example.rayfield.ui.state.MainScreenModel
 import com.example.rayfield.ui.theme.LocalDimensions
@@ -177,7 +176,7 @@ data class EditScreen (
             }
 
             val scrollState = rememberScrollState()
-            val tabs = listOf(SshTab(serverId), InboundTab(configId, serverId), StreamTab, OutboundTab, ProTab)
+            val tabs = listOf(SshTab(serverId), InboundTab(configId, serverId), OutboundTab, ProTab)
 
             TabNavigator(tabs.first()) { tabNavigator ->
                 Box(
