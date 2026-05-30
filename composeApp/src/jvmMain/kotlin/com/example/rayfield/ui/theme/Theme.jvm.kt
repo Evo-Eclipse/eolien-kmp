@@ -7,9 +7,14 @@ import androidx.compose.runtime.Composable
 actual fun RayFieldTheme(
     darkTheme: Boolean,
     dynamicColor: Boolean,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) { 
-    val colorScheme = if (darkTheme) darkScheme else lightScheme
+    val colorScheme = when {
+        dynamicColor && darkTheme -> darkScheme
+        dynamicColor -> lightScheme
+        darkTheme -> darkScheme
+        else -> lightScheme
+    }
     
     MaterialTheme(
         colorScheme = colorScheme, 

@@ -1,4 +1,3 @@
-@file:Suppress("JavaIoSerializableObjectMustHaveReadResolve")
 
 package com.example.rayfield.ui.navigation
 
@@ -16,9 +15,6 @@ import com.example.rayfield.ui.screen.MainScreen
 import com.example.rayfield.ui.screen.RawSshScreen
 import com.example.rayfield.ui.screen.SettingsScreen
 
-//
-// Created by Kirill "Raaveinm" on 5/4/26.
-//
 
 val LocalBackNavigator = staticCompositionLocalOf<MutableState<Navigator?>> {
     error("No LocalBackNavigator provided")

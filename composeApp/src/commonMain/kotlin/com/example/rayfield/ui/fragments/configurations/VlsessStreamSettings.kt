@@ -3,9 +3,6 @@ package com.example.rayfield.ui.fragments.configurations
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.runtime.Composable
 
-//
-// Created by Kirill "Raaveinm" on 5/19/26.
-//
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -51,9 +48,7 @@ fun VlessStreamSettings(
             color = onSurface
         )
 
-        ///////////////////////////////////////////////
-        // NetWork
-        ///////////////////////////////////////////////
+        //region NetWork
 
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -84,9 +79,8 @@ fun VlessStreamSettings(
             color = onSurface.copy(alpha = 0.2f)
         )
 
-        ///////////////////////////////////////////////
-        // Security
-        ///////////////////////////////////////////////
+        //endregion
+        //region Security
 
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -256,4 +250,4 @@ fun VlessStreamSettings(
             Configurations.security.NONE -> {}
         }
     }
-}
+}        //endregion

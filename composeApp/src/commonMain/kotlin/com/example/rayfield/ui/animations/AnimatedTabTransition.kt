@@ -8,9 +8,6 @@ import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.example.rayfield.ui.navigation.tabIndex
 
-//
-// Created by Kirill "Raaveinm" on 5/4/26.
-//
 
 @Composable
 fun AnimatedTabTransition(navigator: TabNavigator) {

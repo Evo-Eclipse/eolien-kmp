@@ -8,9 +8,6 @@ import io.ktor.client.HttpClient
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.request.header
 
-//
-// Created by Kirill "Raaveinm" on 5/6/26.
-//
 
 @Composable
 fun CoilInitializer() {

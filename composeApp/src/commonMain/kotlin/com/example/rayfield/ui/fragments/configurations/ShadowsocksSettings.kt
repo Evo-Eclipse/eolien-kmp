@@ -20,9 +20,6 @@ import io.github.neilyich.glassmorphism.BlurHolder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-//
-// Created by Kirill "Raaveinm" on 5/19/26.
-//
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width

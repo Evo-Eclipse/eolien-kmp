@@ -21,9 +21,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.rayfield.ui.theme.LocalDimensions
 
-//
-// Created by Kirill "Raaveinm" on 5/6/26.
-//
 
 @Composable
 fun ConnectedButtonGroup(

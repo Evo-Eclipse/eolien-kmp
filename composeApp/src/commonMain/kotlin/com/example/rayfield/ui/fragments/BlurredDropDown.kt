@@ -30,9 +30,6 @@ import io.github.neilyich.glassmorphism.BlurHolder
 import io.github.neilyich.glassmorphism.blurredBackground
 import io.github.neilyich.glassmorphism.rememberBlurHolder
 
-//
-// Created by Kirill "Raaveinm" on 5/11/26.
-//
 
 @Composable
 fun BlurredDropDown(

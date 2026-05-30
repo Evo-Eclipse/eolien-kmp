@@ -1,4 +1,3 @@
-@file:Suppress("unused")
 
 package com.example.rayfield.domain.xray
 
@@ -43,9 +42,7 @@ object XrayConfigBuilder {
         )
     }
 
-    ///////////////////////////////////////////////
-    // Log Setting Factory
-    ///////////////////////////////////////////////
+    //region Log Setting Factory
     
     fun logSettingsBuilder(
         access: String? = null,
@@ -56,9 +53,8 @@ object XrayConfigBuilder {
     ): XrayConfig.LogConfig = 
         XrayConfig.LogConfig(access, error, loglevel, dnsLog, maskAddress)
 
-    ///////////////////////////////////////////////
-    // DNS Setting Factory
-    ///////////////////////////////////////////////
+    //endregion
+    //region DNS Setting Factory
     
     fun dnsSettingsBuilder(
         servers: JsonArray? = null,
@@ -87,9 +83,8 @@ object XrayConfigBuilder {
         servers: List<String> = listOf("fakedns", "1.1.1.1", "8.8.8.8", "localhost")
     ) : JsonArray = JsonArray(servers.map { JsonPrimitive(it) })
 
-    ///////////////////////////////////////////////
-    // Routing Setting Factory
-    ///////////////////////////////////////////////
+    //endregion
+    //region Routing Setting Factory
 
     fun routingSettingsBuilder(
         domainStrategy: Configurations.routingDomainStrategy = Configurations.routingDomainStrategy.AS_IS,
@@ -101,9 +96,8 @@ object XrayConfigBuilder {
         )
     }
 
-    ///////////////////////////////////////////////
-    // Inbound Setting Factory
-    ///////////////////////////////////////////////
+    //endregion
+    //region Inbound Setting Factory
     
     fun inboundsSettingsBuilder(
         listen: String = "0.0.0.0",
@@ -170,9 +164,8 @@ object XrayConfigBuilder {
     ) : XrayConfig.SniffingObject = XrayConfig.SniffingObject(
             enabled, destOverride, metadataOnly, domainsExcluded, routeOnly)
 
-    ///////////////////////////////////////////////
-    // Outbound Setting Factory
-    ///////////////////////////////////////////////
+    //endregion
+    //region Outbound Setting Factory
 
     fun outboundsSettingsBuilder(
         sendThrough: String? = null,
@@ -219,4 +212,4 @@ object XrayConfigBuilder {
             xudpQuic = xudpQuic
         )
     }
-}
+}    //endregion

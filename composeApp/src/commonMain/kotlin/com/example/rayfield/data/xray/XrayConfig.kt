@@ -1,16 +1,15 @@
-@file:Suppress("PropertyName")
 
 package com.example.rayfield.data.xray
 
-//
-// Created by Kirill "Raaveinm" on 4/29/26.
-//
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonObject
 
+/**
+ * Root Xray JSON document and nested configuration sections.
+ */
 @Serializable
 data class XrayConfig(
     val log: LogConfig? = null,
@@ -20,9 +19,7 @@ data class XrayConfig(
     val inbounds: List<InboundConfig>? = null,
     val outbounds: List<OutboundConfig>? = null
 ) {
-    ///////////////////////////////////////////////
-    // Log Configuration
-    ///////////////////////////////////////////////
+    //region Log Configuration
 
     @Serializable
     data class LogConfig(
@@ -33,9 +30,8 @@ data class XrayConfig(
         val maskAddress: String? = null //
     )
 
-    ///////////////////////////////////////////////
-    // DNS Configuration
-    ///////////////////////////////////////////////
+    //endregion
+    //region DNS Configuration
 
     @Serializable
     data class DnsConfig(
@@ -51,9 +47,8 @@ data class XrayConfig(
         val poolSize: Int = 65535
     )
 
-    ///////////////////////////////////////////////
-    // Routing Configuration
-    ///////////////////////////////////////////////
+    //endregion
+    //region Routing Configuration
 
     @Serializable
     data class RoutingConfig(
@@ -73,9 +68,8 @@ data class XrayConfig(
         val type: String = "field"
     )
 
-    ///////////////////////////////////////////////
-    // Inbound Configuration
-    ///////////////////////////////////////////////
+    //endregion
+    //region Inbound Configuration
 
     @Serializable
     data class InboundConfig(
@@ -98,9 +92,8 @@ data class XrayConfig(
         val routeOnly: Boolean = false // proxy destination address remains the IP
     )
 
-    ///////////////////////////////////////////////
-    // Outbound Configuration
-    ///////////////////////////////////////////////
+    //endregion
+    //region Outbound Configuration
 
     @Serializable
     data class OutboundConfig(
@@ -119,9 +112,8 @@ data class XrayConfig(
         val tag: String? = null,
         val transportLayer: Boolean = false
     )
-    ///////////////////////////////////////////////
-    // In/Out-bound Configuration
-    ///////////////////////////////////////////////
+    //endregion
+    //region In/Out-bound Configuration
 
     @Serializable
     data class StreamSettings(
@@ -170,9 +162,8 @@ data class XrayConfig(
         val xudpConcurrency: Int = 16,
         val xudpQuic: String = "quic"
     )
-    ///////////////////////////////////////////////
-    // Protocols Configuration
-    ///////////////////////////////////////////////
+    //endregion
+    //region Protocols Configuration
 
     sealed interface InboundSettings
 
@@ -265,4 +256,4 @@ data class XrayConfig(
         val email: String? = null,
         val level: Int? = null
     )
-}
+}    //endregion

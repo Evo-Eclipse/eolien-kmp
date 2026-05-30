@@ -11,9 +11,6 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.zIndex
 
-//
-// Created by Kirill "Raaveinm" on 5/6/26.
-//
 
 @Composable
 fun Circles(circles: List<Circle>) {

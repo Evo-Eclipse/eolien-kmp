@@ -1,10 +1,6 @@
-@file:Suppress("JavaIoSerializableObjectMustHaveReadResolve")
 
 package com.example.rayfield.ui.navigation
 
-//
-// Created by Kirill "Raaveinm" on 5/4/26.
-//
 
 import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.navigator.tab.Tab
@@ -14,9 +10,6 @@ import com.example.rayfield.ui.screen.edit.OutboundScreen
 import com.example.rayfield.ui.screen.edit.ProScreen
 import com.example.rayfield.ui.screen.edit.SshScreen
 
-//
-// Created by Kirill "Raaveinm" on 5/4/26.
-//
 
 data class SshTab(
     val serverId: String? = null,

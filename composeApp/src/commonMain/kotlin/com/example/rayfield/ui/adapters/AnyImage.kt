@@ -25,9 +25,6 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import rayfield.composeapp.generated.resources.*
 
-//
-// Created by Kirill "Raaveinm" on 5/6/26.
-//
 
 @Composable
 fun AnyImage(

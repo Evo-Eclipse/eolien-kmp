@@ -2,9 +2,6 @@ package com.example.rayfield.domain.xray
 
 import com.example.rayfield.data.xray.types.XrayKeyPair
 
-//
-// Created by Kirill "Raaveinm" on 4/29/26.
-//
 
 expect class CypherService() {
     fun generateUuid(): String

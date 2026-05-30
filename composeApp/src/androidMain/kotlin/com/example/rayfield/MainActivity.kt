@@ -9,7 +9,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import com.example.rayfield.domain.helpers.ClipboardHelper
 import com.example.rayfield.ui.decoration.Circles
 import com.example.rayfield.ui.decoration.circlesAndroid
 import com.example.rayfield.ui.state.GlobalBlurHolder
@@ -33,6 +36,12 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             val blurHolder = rememberBlurHolder()
+            val context = LocalContext.current
+
+            LaunchedEffect(Unit) {
+                ClipboardHelper.init(context)
+            }
+
             RayFieldTheme {
                 CompositionLocalProvider(GlobalBlurHolder provides blurHolder) {
                     Scaffold(

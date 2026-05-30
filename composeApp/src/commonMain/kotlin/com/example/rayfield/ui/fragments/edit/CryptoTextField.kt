@@ -10,9 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import io.ktor.websocket.Frame
 
-//
-// Created by Kirill "Raaveinm" on 5/11/26.
-//
 
 @Composable
 fun CryptoTextField(

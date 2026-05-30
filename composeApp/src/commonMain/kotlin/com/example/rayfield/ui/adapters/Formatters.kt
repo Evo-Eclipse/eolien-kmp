@@ -2,9 +2,6 @@ package com.example.rayfield.ui.adapters
 
 import androidx.compose.foundation.text.input.InputTransformation
 
-//
-// Created by Kirill "Raaveinm" on 5/6/26.
-//
 
 val IpAutoFormatTransformation = InputTransformation {
     val originalText = asCharSequence().toString()

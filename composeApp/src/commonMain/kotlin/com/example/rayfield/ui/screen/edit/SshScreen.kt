@@ -1,17 +1,25 @@
 package com.example.rayfield.ui.screen.edit
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.ExpandLess
+import androidx.compose.material.icons.outlined.ExpandMore
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,7 +34,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.rayfield.ui.adapters.AdaptivePadding
 import com.example.rayfield.ui.adapters.AnyImage
 import com.example.rayfield.ui.adapters.IpAutoFormatTransformation
@@ -36,17 +45,16 @@ import com.example.rayfield.ui.fragments.edit.SettingOutlinedText
 import com.example.rayfield.ui.screen.LocalSharedEditModel
 import com.example.rayfield.ui.state.GlobalBlurHolder
 import com.example.rayfield.ui.state.configuration.EditIntent
+import com.example.rayfield.ui.theme.LocalDimensions
 import io.github.neilyich.glassmorphism.blurredBackground
 import io.github.neilyich.glassmorphism.rememberBlurHolder
 
-//
-// Created by Kirill "Raaveinm" on 5/4/26.
-//
 
 @Composable
-fun Screen.SshScreen() {
+fun SshScreen() {
     val editScreenModel = LocalSharedEditModel.current
     val state by editScreenModel.state.collectAsState()
+    val navigator = LocalNavigator.currentOrThrow
 
     val globalBlurHolder = GlobalBlurHolder.current ?: rememberBlurHolder()
     val lazyState = rememberLazyListState()
@@ -70,14 +78,15 @@ fun Screen.SshScreen() {
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
                 state = lazyState,
-                contentPadding = AdaptivePadding.adaptiveAll,
-                verticalArrangement = Arrangement.spacedBy(16.dp),
+                contentPadding = AdaptivePadding.adaptiveExtended,
+                verticalArrangement = Arrangement.spacedBy(LocalDimensions.current.mediumPadding),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                //region IP / Port
                 item {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(16.dp),
+                        horizontalArrangement = Arrangement.spacedBy(LocalDimensions.current.mediumPadding),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         SettingOutlinedText(
@@ -101,6 +110,8 @@ fun Screen.SshScreen() {
                     }
                 }
 
+                //endregion
+                //region SSH username
                 item {
                     SettingOutlinedText(
                         state = editScreenModel.sshLoginState,
@@ -111,7 +122,8 @@ fun Screen.SshScreen() {
                     )
                 }
 
-
+                //endregion
+                //region Password / PKey
                 item {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -165,15 +177,44 @@ fun Screen.SshScreen() {
                     )
                 }
 
+                //endregion
+                //region Server Icon
                 item {
-                    ImagePicker(
-                        onImageSelected = { anyImage ->
-                            editScreenModel.processIntent(EditIntent.SetIconServer(anyImage))
-                        },
-                        onCustomSelected = {
-                            editScreenModel.processIntent(EditIntent.SetIconServer(null))
+                    var isVisible by remember { mutableStateOf(false) }
+
+                    Column {
+                        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                            Text(
+                                text = "Icon",
+                                modifier = Modifier.align(Alignment.CenterVertically),
+                                color = MaterialTheme.colorScheme.onSurface
+                            )
+                            HorizontalDivider(
+                                modifier = Modifier.weight(1f),
+                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f)
+                            )
+                            IconButton(
+                                onClick = { isVisible = !isVisible },
+                                modifier = Modifier.align(Alignment.CenterVertically)
+                            )  {
+                                Icon(
+                                    imageVector = if (isVisible) Icons.Outlined.ExpandLess else Icons.Outlined.ExpandMore,
+                                    contentDescription = "Expand",
+                                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.64f)
+                                )
+                            }
                         }
-                    )
+                        AnimatedVisibility(isVisible) {
+                            ImagePicker(
+                                onImageSelected = { anyImage ->
+                                    editScreenModel.processIntent(EditIntent.SetIconServer(anyImage))
+                                },
+                                onCustomSelected = {
+                                    editScreenModel.processIntent(EditIntent.SetIconServer(null))
+                                }
+                            )
+                        }
+                    }
                     // Preview
                     AnyImage(
                         picture = state.serverIcon,
@@ -182,17 +223,33 @@ fun Screen.SshScreen() {
                         textBackground = MaterialTheme.colorScheme.primaryContainer,
                         text = MaterialTheme.colorScheme.onPrimaryContainer,
                         shape = RoundedCornerShape(24.dp),
-                        modifier = Modifier.padding(top = 16.dp)
+                        modifier = Modifier.padding(top = LocalDimensions.current.mediumPadding)
                     )
                 }
 
                 item {
-                    Button(
-                        modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
-                        onClick = { editScreenModel.processIntent(EditIntent.Save) }
-                    ) { Text("Save Server Configuration") }
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Button(
+                            modifier = Modifier.wrapContentWidth().padding(end = LocalDimensions.current.mediumPadding),
+                            onClick = { editScreenModel.processIntent(EditIntent.Save) }
+                        ) { Text("Save") }
+                        if(editScreenModel.state.collectAsState().value.serverId.isNotBlank()) {
+                            Button(
+                                modifier = Modifier.wrapContentWidth(),
+                                onClick = {
+                                    navigator.pop()
+                                    editScreenModel.processIntent(EditIntent.Delete)
+                                }
+                            ) { Text("Delete") }
+                        }
+                    }
                 }
             }
         }
     }
 }
+                //endregion

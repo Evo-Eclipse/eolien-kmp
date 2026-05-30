@@ -38,13 +38,11 @@ fun Screen.OutboundScreen() {
     ) {
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
-            contentPadding = AdaptivePadding.adaptiveAll,
+            contentPadding = AdaptivePadding.adaptiveExtended,
             verticalArrangement = Arrangement.spacedBy(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            ///////////////////////////////////////////////
-            // Protocol Selector
-            ///////////////////////////////////////////////
+            //region Protocol Selector
             item {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -64,9 +62,8 @@ fun Screen.OutboundScreen() {
                     )
                 }
             }
-            ///////////////////////////////////////////////
-            // Tag Input
-            ///////////////////////////////////////////////
+            //endregion
+            //region Tag Input
             item {
                 SettingOutlinedText(
                     state = editScreenModel.outboundTagState,
@@ -75,9 +72,8 @@ fun Screen.OutboundScreen() {
                 )
             }
 
-            ///////////////////////////////////////////////
-            // Dynamic Protocol Configuration
-            ///////////////////////////////////////////////
+            //endregion
+            //region Dynamic Protocol Configuration
             if (outbound.protocol == Configurations.protocol.VLESS || outbound.protocol == Configurations.protocol.SHADOWSOCKS) {
                 item {
                     HorizontalDivider(
@@ -149,3 +145,4 @@ fun Screen.OutboundScreen() {
         }
     }
 }
+            //endregion

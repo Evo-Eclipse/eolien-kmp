@@ -6,9 +6,6 @@ import com.example.rayfield.domain.helpers.LocalWindowSize
 import com.example.rayfield.domain.helpers.WindowSize
 import com.example.rayfield.ui.theme.LocalDimensions
 
-//
-// Created by Kirill "Raaveinm" on 5/11/26.
-//
 
 object AdaptivePadding{
     val adaptiveCompact: PaddingValues
@@ -45,4 +42,25 @@ object AdaptivePadding{
                 )
             }
         }
+
+    val adaptiveExtended: PaddingValues
+    @Composable
+    get() {
+        val dimen = LocalDimensions.current
+        val windowSize = LocalWindowSize.current
+        return when (windowSize) {
+            WindowSize.EXPANDED -> PaddingValues(
+                vertical = dimen.mediumMargin,
+                horizontal = dimen.sMediumMargin
+            )
+            WindowSize.COMPACT -> PaddingValues(
+                vertical = dimen.mediumMargin,
+                horizontal = dimen.sMediumPadding,
+            )
+            WindowSize.MEDIUM -> PaddingValues(
+                vertical = dimen.mediumMargin,
+                horizontal = dimen.extraSmallMargin,
+            )
+        }
+    }
 }

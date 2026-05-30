@@ -1,12 +1,8 @@
-@file:Suppress("unused")
 
 package com.example.rayfield.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-//
-// Created by Kirill "Raaveinm" on 5/7/26.
-//
 
 object SeaWaveColors {
     val primaryLight = Color(0xFF1F6587)

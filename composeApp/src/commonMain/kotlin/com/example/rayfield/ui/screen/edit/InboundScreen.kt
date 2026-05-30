@@ -41,9 +41,6 @@ import io.github.neilyich.glassmorphism.blurredBackground
 import io.github.neilyich.glassmorphism.rememberBlurHolder
 import kotlinx.coroutines.launch
 
-//
-// Created by Kirill "Raaveinm" on 5/4/26.
-//
 
 @Composable
 fun InboundScreen() {
@@ -68,7 +65,7 @@ fun InboundScreen() {
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             state = lazyState,
-            contentPadding = AdaptivePadding.adaptiveAll,
+            contentPadding = AdaptivePadding.adaptiveExtended,
             verticalArrangement = Arrangement.spacedBy(LocalDimensions.current.mediumPadding),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -90,6 +87,8 @@ fun InboundScreen() {
                     )
                 }
             }
+
+            //region Protocol Selector
             item {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -139,6 +138,8 @@ fun InboundScreen() {
                 }
             }
 
+            //endregion
+            //region Protocol Specific Configuration
             item {
                 when (state.inbound.inboundProtocol) {
                     Configurations.inboundProtocol.SHADOWSOCKS -> {
@@ -230,6 +231,8 @@ fun InboundScreen() {
                 }
             }
 
+            //endregion
+            //region Fallback Destination
             item {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -245,12 +248,14 @@ fun InboundScreen() {
                     )
                 }
             }
+
             item {
                 HorizontalDivider(
                     modifier = Modifier.padding(vertical = 8.dp),
                     color = onSurface.copy(alpha = 0.2f)
                 )
             }
+
             item {
                 Button(
                     modifier = Modifier.fillMaxWidth().padding(top = LocalDimensions.current.mediumPadding),
@@ -262,3 +267,4 @@ fun InboundScreen() {
         }
     }
 }
+            //endregion

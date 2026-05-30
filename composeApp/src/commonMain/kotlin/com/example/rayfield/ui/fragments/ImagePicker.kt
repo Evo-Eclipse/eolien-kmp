@@ -24,9 +24,6 @@ import androidx.compose.ui.unit.dp
 import com.example.rayfield.ui.adapters.AnyImage
 import com.example.rayfield.ui.mock.flags
 
-//
-// Created by Kirill "Raaveinm" on 5/28/26.
-//
 
 @Composable
 fun ImagePicker(

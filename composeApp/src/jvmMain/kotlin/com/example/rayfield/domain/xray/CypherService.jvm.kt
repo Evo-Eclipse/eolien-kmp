@@ -9,9 +9,6 @@ import java.security.SecureRandom
 import java.util.Base64
 import java.util.UUID
 
-//
-// Created by Kirill "Raaveinm" on 4/29/26.
-//
 
 actual class CypherService {
     private val secureRandom = SecureRandom()

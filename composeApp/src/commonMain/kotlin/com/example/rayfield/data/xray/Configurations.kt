@@ -1,18 +1,13 @@
-@file:Suppress("ClassName", "unused")
 package com.example.rayfield.data.xray
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
-//
-// Created by Kirill "Raaveinm" on 4/29/26.
-//
-
+/**
+ * Serializable enums and helpers for Xray-core configuration fields.
+ */
 object Configurations {
-    ///////////////////////////////////////////////
-    // Common
-    ///////////////////////////////////////////////
+    //region Common
 
     @Serializable
     enum class network {
@@ -32,9 +27,8 @@ object Configurations {
         @SerialName("blackhole") BLACKHOLE
     }
 
-    ///////////////////////////////////////////////
-    // Log Configuration
-    ///////////////////////////////////////////////
+    //endregion
+    //region Log Configuration
 
     @Serializable
     enum class loglevel {
@@ -50,9 +44,8 @@ object Configurations {
         NONE
     }
 
-    ///////////////////////////////////////////////
-    // DNS Configuration
-    ///////////////////////////////////////////////
+    //endregion
+    //region DNS Configuration
 
     @Serializable
     enum class queryStrategy {
@@ -71,9 +64,8 @@ object Configurations {
         @SerialName("update.microsoft.com") MICROSOFT("update.microsoft.com")
     }
 
-    ///////////////////////////////////////////////
-    // Routing
-    ///////////////////////////////////////////////
+    //endregion
+    //region Routing
 
     @Serializable
     enum class routingDomainStrategy {
@@ -82,9 +74,8 @@ object Configurations {
         @SerialName("IPOnDemand") IP_ON_DEMAND
     }
 
-    ///////////////////////////////////////////////
-    // Inbound Configuration
-    ///////////////////////////////////////////////
+    //endregion
+    //region Inbound Configuration
 
     @Serializable
     enum class inboundProtocol {
@@ -106,9 +97,8 @@ object Configurations {
         @SerialName("fakedns") FAKE_DNS
     }
 
-    ///////////////////////////////////////////////
-    // Outbound Configuration
-    ///////////////////////////////////////////////
+    //endregion
+    //region Outbound Configuration
 
     @Serializable
     enum class transportNetwork {
@@ -140,9 +130,8 @@ object Configurations {
         @SerialName("ForceIPv4") FORCE_IPV4
     }
 
-    ///////////////////////////////////////////////
-    // Protocol Configuration
-    ///////////////////////////////////////////////
+    //endregion
+    //region Protocol Configuration
 
     // Shadowsocks
 
@@ -204,3 +193,4 @@ object Configurations {
         @SerialName("tcp,udp") TCP_UDP
     }
 }
+    //endregion

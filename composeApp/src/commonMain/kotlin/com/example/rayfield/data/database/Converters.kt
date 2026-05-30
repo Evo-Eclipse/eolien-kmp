@@ -2,7 +2,6 @@ package com.example.rayfield.data.database
 
 import androidx.room3.TypeConverter
 import com.example.rayfield.data.xray.types.XrayKeyPair
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 class Converters {

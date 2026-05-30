@@ -67,8 +67,6 @@ fun App(
                     modifier = Modifier.blurredContent(blurHolder)
                 ) { AnimatedTabTransition(navigator) }
 
-                Text(windowSize.toString(), color = MaterialTheme.colorScheme.onSurface)
-
                 TopBar(
                     modifier = Modifier
                         .wrapContentWidth()

@@ -5,9 +5,6 @@ import androidx.room3.Relation
 import com.example.rayfield.data.ssh.ServerUnit
 import com.example.rayfield.data.xray.types.ServerState
 
-//
-// Created by Kirill "Raaveinm" on 5/7/26.
-//
 
 data class ServerWithState(
     @Embedded val server: ServerUnit,

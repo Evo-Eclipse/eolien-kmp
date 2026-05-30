@@ -24,16 +24,13 @@ import com.example.rayfield.domain.xray.ShareLinkGenerator
 import kotlinx.coroutines.flow.first
 import kotlin.random.Random
 
-//
-// Created by Kirill "Raaveinm" on 5/11/26.
-//
 
 class EditScreenModel(
     val serverDao: ServerDao,
     private val cypherService: CypherService,
     private val shareLinkGenerator: ShareLinkGenerator,
-    private val initialConfigId: String? = null,
-    private val initialServerId: String? = null
+    initialConfigId: String? = null,
+    private val initialServerId: String? = null,
 ) : ScreenModel {
     val connectionNameState = TextFieldState()
     val serverAddressState = TextFieldState()
@@ -45,7 +42,6 @@ class EditScreenModel(
     val trojanPasswordState = TextFieldState()
     val fallbackDestState = TextFieldState()
     val tlsServerNameState = TextFieldState()
-    val tlsFingerprintState = TextFieldState() // TODO("Dropdown with supported fingerprints")
     val realityCustomTargetState = TextFieldState()
     private val _isCustomTarget = MutableStateFlow(false)
     val isCustomTarget = _isCustomTarget.asStateFlow()
@@ -384,6 +380,18 @@ class EditScreenModel(
             }
             
             EditIntent.Save -> { screenModelScope.launch { saveServer() } }
+            EditIntent.Delete -> {
+                screenModelScope.launch {
+                    val currentId = _state.value.serverId
+                    if (currentId.isNotBlank()) {
+                        val server = serverDao.getServerUnitById(currentId)
+                        if (server != null) {
+                            serverDao.deleteServerUnit(server)
+                            _state.update { it.copy(isSaved = true) }
+                        }
+                    }
+                }
+            }
             EditIntent.Cancel -> { /* Handle cancel */ }
         }
     }
@@ -495,12 +503,13 @@ class EditScreenModel(
                 }
 
                 XrayConfig.RealitySettings(
-                    dest = realityDestState.text.toString().takeIf { it.isNotBlank() } ?: (activeTargetDomain + ":443"),
+                    dest = realityDestState.text.toString().takeIf { it.isNotBlank() }
+                        ?: "$activeTargetDomain:443",
                     target = if (_isCustomTarget.value) null else currentState.stream.realitySettings?.target ?: Configurations.targetOptions.GITHUB,
                     customTarget = if (_isCustomTarget.value) realityCustomTargetState.text.toString().takeIf { it.isNotBlank() } else null,
                     serverNames = sNames.ifEmpty { listOf(activeTargetDomain) },
-                    privateKey = pKey ?: finalKeyPair!!.privateKey,
-                    password = pubKey ?: finalKeyPair!!.publicKey,
+                    privateKey = pKey ?: checkNotNull(finalKeyPair) { "Reality key pair missing" }.privateKey,
+                    password = pubKey ?: checkNotNull(finalKeyPair) { "Reality key pair missing" }.publicKey,
                     shortIds = sIds.ifEmpty { listOf("") },
                     fingerprint = currentState.stream.fingerprint
                 )
@@ -610,7 +619,7 @@ class EditScreenModel(
 
         serverDao.insertServerUnit(targetServerUnit)
         
-        // --- Database Reconciliation (Link Generation & Sync) ---
+        //region Database Reconciliation (Link Generation & Sync)
         val existingStates = serverDao.getServerStatesForServer(targetServerUnit.serverId).first()
         val existingStateMap = existingStates.associateBy { it.configId }
 
@@ -685,7 +694,7 @@ class EditScreenModel(
 
         currentUsersList.forEach { draft ->
             if (existingStateMap.containsKey(draft.id)) {
-                val stateToUpdate = existingStateMap[draft.id]!!
+                val stateToUpdate = existingStateMap.getValue(draft.id)
                 val newIcon = currentState.configIcons[draft.id]
                 if (stateToUpdate.sharedLink != draft.link || stateToUpdate.connectionName != draft.name || stateToUpdate.serverAddress != targetServerUnit.serverIp || stateToUpdate.jsonSettings != draft.json || stateToUpdate.iconLocation != newIcon) {
                     serverDao.insertServerState(stateToUpdate.copy(
@@ -714,7 +723,7 @@ class EditScreenModel(
         // Delete removed users
         val idsToDelete = existingStateMap.keys - currentIds
         idsToDelete.forEach { id ->
-            serverDao.deleteServerState(existingStateMap[id]!!)
+            serverDao.deleteServerState(existingStateMap.getValue(id))
         }
 
         _state.update { it.copy(serverId = targetServerUnit.serverId, isSaved = true) }
@@ -746,9 +755,8 @@ class EditScreenModel(
     }
 
 
-    ///////////////////////////////////////////////
-    // Server configuration
-    ///////////////////////////////////////////////
+        //endregion
+    //region Server configuration
     fun installServer() {
         val currentServerId = _state.value.serverId
         if (currentServerId.isBlank()) {
@@ -842,3 +850,4 @@ class EditScreenModel(
         }
     }
 }
+    //endregion

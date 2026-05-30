@@ -11,12 +11,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalComposeUiApi::class)
-actual fun Modifier.horizontalMouseScroll(state: LazyGridState): Modifier =
+actual fun Modifier.horizontalMouseScroll(_state: LazyGridState): Modifier =
     this.onPointerEvent(PointerEventType.Scroll) {
     val delta = it.changes.first().scrollDelta.y
     if (delta != 0f) {
         CoroutineScope(Dispatchers.Main).launch {
-            state.scrollBy(delta * 100f)
+            _state.scrollBy(delta * 100f)
         }
     }
 }

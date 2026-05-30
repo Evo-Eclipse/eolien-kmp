@@ -1,8 +1,5 @@
 package com.example.rayfield.data.xray.types
 
-//
-// Created by Kirill "Raaveinm" on 4/29/26.
-//
 
 import kotlinx.serialization.Serializable
 

@@ -9,7 +9,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.screen.Screen
 import com.example.rayfield.data.xray.Configurations
 import com.example.rayfield.ui.adapters.AdaptivePadding
 import com.example.rayfield.ui.fragments.BlurredDropDown
@@ -22,7 +21,7 @@ import io.github.neilyich.glassmorphism.blurredBackground
 import io.github.neilyich.glassmorphism.rememberBlurHolder
 
 @Composable
-fun Screen.ProScreen() {
+fun ProScreen() {
     val globalBlurHolder = GlobalBlurHolder.current ?: rememberBlurHolder()
     val lazyState = rememberLazyListState()
     val editScreenModel = LocalSharedEditModel.current
@@ -39,13 +38,11 @@ fun Screen.ProScreen() {
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             state = lazyState,
-            contentPadding = AdaptivePadding.adaptiveAll,
+            contentPadding = AdaptivePadding.adaptiveExtended,
             verticalArrangement = Arrangement.spacedBy(LocalDimensions.current.mediumPadding),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            ///////////////////////////////////////////////
-            // Log Configuration
-            ///////////////////////////////////////////////
+            //region Log Configuration
             item {
                 Text(
                     text = "Logging Settings",
@@ -119,9 +116,8 @@ fun Screen.ProScreen() {
                 )
             }
 
-            ///////////////////////////////////////////////
-            // Routing Configuration
-            ///////////////////////////////////////////////
+            //endregion
+            //region Routing Configuration
             item {
                 Spacer(modifier = Modifier.height(LocalDimensions.current.smallPadding))
                 HorizontalDivider(
@@ -156,9 +152,8 @@ fun Screen.ProScreen() {
                 }
             }
 
-            ///////////////////////////////////////////////
-            // Save Configuration Action
-            ///////////////////////////////////////////////
+            //endregion
+            //region Save Configuration Action
             item {
                 Spacer(modifier = Modifier.height(LocalDimensions.current.mediumPadding))
                 Button(
@@ -169,9 +164,8 @@ fun Screen.ProScreen() {
                 }
             }
 
-            ///////////////////////////////////////////////
-            // Install Configuration
-            ///////////////////////////////////////////////
+            //endregion
+            //region Install Configuration
             item {
                 Text(
                     text = "Server Installation",
@@ -202,3 +196,4 @@ fun Screen.ProScreen() {
         }
     }
 }
+            //endregion

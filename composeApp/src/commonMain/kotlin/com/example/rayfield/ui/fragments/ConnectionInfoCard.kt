@@ -72,8 +72,7 @@ fun ConnectionInfoCard(
         )
     ) {
         val displayName = remember(serverState.connectionName, serverState.serverAddress) {
-            if (serverState.connectionName.isNullOrBlank()) serverState.serverAddress
-            else serverState.connectionName!!
+            serverState.connectionName?.takeIf { it.isNotBlank() } ?: serverState.serverAddress
         }
 
         Column(
@@ -83,9 +82,7 @@ fun ConnectionInfoCard(
                 .animateContentSize(),
             verticalArrangement = Arrangement.spacedBy(dimensions.smallPadding)
         ) {
-            ///////////////////////////////////////////////
-            // Upper Row
-            ///////////////////////////////////////////////
+            //region Upper Row
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -141,9 +138,8 @@ fun ConnectionInfoCard(
                 } else followingIcon()
             }
 
-            ///////////////////////////////////////////////
-            // Expandable
-            ///////////////////////////////////////////////
+            //endregion
+            //region Expandable
             if (isExpanded) {
 
                 Row(
@@ -247,4 +243,4 @@ fun ServerCardPreview() {
             )
         }
     }
-}
+}            //endregion

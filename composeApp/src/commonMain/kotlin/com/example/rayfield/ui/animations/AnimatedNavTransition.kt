@@ -10,9 +10,6 @@ import cafe.adriel.voyager.core.stack.StackEvent
 import cafe.adriel.voyager.navigator.Navigator
 import com.example.rayfield.ui.navigation.LocalBackNavigator
 
-//
-// Created by Kirill "Raaveinm" on 5/4/26.
-//
 
 @Composable
 fun AnimatedNavTransition(navigator: Navigator) {

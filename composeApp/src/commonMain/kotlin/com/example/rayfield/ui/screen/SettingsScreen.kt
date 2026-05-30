@@ -9,9 +9,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import cafe.adriel.voyager.core.screen.Screen
 
-//
-// Created by Kirill "Raaveinm" on 5/5/26.
-//
 
 class SettingsScreen : Screen {
     @Composable

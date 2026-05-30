@@ -18,12 +18,6 @@ import androidx.compose.ui.unit.dp
 import com.example.rayfield.data.ssh.ServerUnit
 import com.example.rayfield.ui.adapters.AnyImage
 import com.example.rayfield.ui.theme.LocalDimensions
-import rayfield.composeapp.generated.resources.Res
-import rayfield.composeapp.generated.resources.flag_germany
-
-//
-// Created by Kirill "Raaveinm" on 5/3/26.
-//
 
 @Composable
 fun ServerInfoCard(

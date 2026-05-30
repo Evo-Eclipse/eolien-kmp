@@ -5,9 +5,6 @@ import com.example.rayfield.data.xray.XrayConfig
 import com.example.rayfield.data.xray.types.XrayKeyPair
 import kotlinx.serialization.json.JsonObject
 
-//
-// Created by Kirill "Raaveinm" on 5/11/26.
-//
 
 data class EditDraftState (
     val connectionName: String = "",
@@ -81,9 +78,10 @@ sealed interface EditIntent {
     data class SetIconServer(val icon: String?) : EditIntent
     data class SetIconUserConfig(val id: String, val icon: String?) : EditIntent
     object Save : EditIntent
+    object Delete : EditIntent
     object Cancel : EditIntent
 
-    // --- Inbound Updates ---
+    //region Inbound Updates
     data class UpdateInboundPort(val port: Int) : EditIntent
     data class UpdateInboundListen(val listen: String) : EditIntent
     data class UpdateInboundProtocol(val protocol: Configurations.inboundProtocol) : EditIntent
@@ -99,16 +97,19 @@ sealed interface EditIntent {
     data class UpdateShadowsocksFallback(val enabled: Boolean) : EditIntent
     data class UpdateVlessDecryption(val decryption: Configurations.vlessDecryption) : EditIntent
 
-    // --- Outbound Updates ---
+    //endregion
+    //region Outbound Updates
     data class UpdateOutboundProtocol(val protocol: Configurations.protocol) : EditIntent
     data class UpdateOutboundShadowsocksMethod(val method: Configurations.shadowsocksMethod) : EditIntent
 
-    // --- Pro Updates ---
+    //endregion
+    //region Pro Updates
     data class UpdateLogLevel(val level: Configurations.loglevel) : EditIntent
     data class UpdateDnsLogEnabled(val enabled: Boolean) : EditIntent
     data class UpdateRoutingDomainStrategy(val strategy: Configurations.routingDomainStrategy) : EditIntent
 
-    // --- Bulk Updates ---
+    //endregion
+    //region Bulk Updates
     data class UpdateInbound(val inbound: InboundDraftState) : EditIntent
     data class UpdateStream(val stream: StreamDraftState) : EditIntent
     data class UpdateOutbound(val outbound: OutboundDraftState) : EditIntent
@@ -120,3 +121,4 @@ sealed interface EditIntent {
     data class UpdateTlsFingerprint(val fingerprint: Configurations.fingerprint) : EditIntent
     data class UpdateRealityTarget(val target: Configurations.targetOptions) : EditIntent
 }
+    //endregion

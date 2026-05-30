@@ -6,9 +6,6 @@ import androidx.compose.runtime.MutableState
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.transitions.SlideTransition
 
-//
-// Created by Kirill "Raaveinm" on 5/4/26.
-//
 
 @Composable
 fun StatefulSlideTransition(

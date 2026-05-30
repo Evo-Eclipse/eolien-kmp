@@ -1,8 +1,5 @@
 package com.example.rayfield.domain.helpers
 
-//
-// Created by Kirill "Raaveinm" on 5/3/26.
-//
 
 class PlatformIdentity {
     enum class Platforms {

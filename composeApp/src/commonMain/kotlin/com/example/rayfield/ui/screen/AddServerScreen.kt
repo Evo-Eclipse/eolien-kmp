@@ -7,9 +7,6 @@ import cafe.adriel.voyager.koin.koinScreenModel
 import com.example.rayfield.ui.screen.edit.SshScreen
 import com.example.rayfield.ui.state.configuration.EditScreenModel
 
-//
-// Created by Kirill "Raaveinm" on 5/4/26.
-//
 
 class AddServerScreen : Screen {
     @Composable

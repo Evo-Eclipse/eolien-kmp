@@ -13,24 +13,19 @@ import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.navigator.Navigator
 import com.example.rayfield.data.ssh.ServerUnit
 import com.example.rayfield.domain.helpers.WindowSize
 import com.example.rayfield.domain.helpers.calculateWindowSize
 import com.example.rayfield.ui.adapters.horizontalMouseScroll
-import com.example.rayfield.ui.screen.EditScreen
 import com.example.rayfield.ui.theme.LocalDimensions
 
-//
-// Created by Kirill "Raaveinm" on 5/4/26.
-//
 
 
 @Composable fun DisplayGrid(
     modifier: Modifier = Modifier,
     serverList: List<ServerUnit>? = null,
     onClick: (ServerUnit) -> Unit = {},
-    onLongClick: (ServerUnit) -> Unit = {}
+    _onLongClick: (ServerUnit) -> Unit = {},
 ) {
     val dimen = LocalDimensions.current
     val windowSize = calculateWindowSize()
